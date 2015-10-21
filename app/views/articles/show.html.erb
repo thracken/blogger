@@ -1,11 +1,12 @@
-<h2><%= @article.title %></h2>
+<h1><%= @article.title %></h1>
+<p>Tags: <% @article.tags.each do |tag| %>
+         <%= link_to tag.name, tag_path(tag) %>
+         <% end %>
+</p><br />
 <p><%= @article.body %></p>
 <br />
-<%= link_to "Edit this article", edit_article_path(@article) %><br />
-<%= link_to "Delete this article", article_path(@article), method: :delete, data: {confirm: "Are you sure?"} %><br />
-
-<h4>(<%= @article.comments.size %>) Comments:</h4>
+<%= link_to "<< Back to all articles", articles_path %> | <%= link_to "Edit this article", edit_article_path(@article) %> | <%= link_to "Delete this article", article_path(@article), method: :delete, data: {confirm: "Are you sure?"} %><br />
+<br />
+<h4><%= @article.comments.size %> Comments:</h4>
 <%= render partial: "articles/comment", collection: @article.comments %>
 <%= render partial: "comments/form" %>
-<br />
-<%= link_to "<< Back to all articles", articles_path %>
